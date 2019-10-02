@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>小游戏案例之Flappy Bird</title>
+    <script src="./js/Sky.js"></script>
+    <script src="./js/Ground.js"></script>
+    <script src="./js/Tunnel.js"></script>
+    <script src="./js/Load.js"></script>
+
+</head>
+
+<body>
+    <h1>hello World</h1>
+    <canvas class='myCanvas' id='myCanvas' width="800px" height="600px">
+    </canvas>
+
+</body>
+<script>
+    var canvas = document.getElementById("myCanvas");
+    ctx = canvas.getContext("2d");
+    //加载资源：
+    var imageList = [
+        {"name":"sky","src":"./img/bg.jpg"},
+        {"name":"tunnel_up","src":"./img/上管道.jpg"},
+        {"name":"tunnel_down","src":"./img/下管道.jpg"},
+        {"name":"ground","src":"./img/ground.jpg"}
+    ];
+    load(imageList,function(imgs){
+        var sky1 = new Sky(imgs["sky"],0,-0.3,ctx);
+        var sky2 = new Sky(imgs["sky"],800,-0.3,ctx);
+
+        var tunnel1 = new Tunnel(imgs["tunnel_up"],imgs["tunnel_down"],400, -0.1,ctx);
+        var tunnel2 = new Tunnel(imgs["tunnel_up"],imgs["tunnel_down"],600, -0.1,ctx);
+        var tunnel3 = new Tunnel(imgs["tunnel_up"],imgs["tunnel_down"],800, -0.1,ctx);
+        var tunnel4 = new Tunnel(imgs["tunnel_up"],imgs["tunnel_down"],1000,-0.1,ctx);
+        var tunnel5 = new Tunnel(imgs["tunnel_up"],imgs["tunnel_down"],1200,-0.1,ctx);
+
+        var ground1 = new Ground(imgs["ground"],0,-0.1,ctx);//背景，X位置，速度，ctx
+        var ground2 = new Ground(imgs["ground"],336*1,-0.1,ctx);
+        var ground3 = new Ground(imgs["ground"],336*2,-0.1,ctx);
+        var ground4 = new Ground(imgs["ground"],336*3,-0.1,ctx);
+
+        var preTime = Date.now();
+        function run(){
+            var nowTime = Date.now();
+            duration = nowTime - preTime;
+            preTime =nowTime;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            console.log(duration);
+            //绘制图片
+            sky1.update(duration);
+            sky1.draw();
+            sky2.update(duration);
+            sky2.draw();
+            sky1.setNum(2);
+            requestAnimationFrame(run);
+        }
+        requestAnimationFrame(run);
+    });
+
+
+    /*var bg = new Image();
+    bg.src = "./img/bg.jpg";
+    var tunnel_up = new Image();
+    tunnel_up.src = "./img/上管道.jpg";
+    var tunnel_down = new Image();
+    tunnel_down.src = "./img/下管道.jpg";
+    var ground = new Image();
+    ground.src = "./img/ground.jpg";
+    /*bg.onload = function () {
+        ctx.drawImage(bg,0,0);
+    }*/
+
+    /*console.log(bg.src);
+    var sky1 = new Sky(bg,0,-0.3,ctx);
+    var sky2 = new Sky(bg,800,-0.3,ctx);
+    sky1.draw();*/
+
+    /*var tunnel1 = new Tunnel(tunnel_up,tunnel_down,400,-0.1,ctx);
+    var tunnel2 = new Tunnel(tunnel_up,tunnel_down,500,-0.1,ctx);
+    var tunnel3 = new Tunnel(tunnel_up,tunnel_down,600,-0.1,ctx);
+    var tunnel4 = new Tunnel(tunnel_up,tunnel_down,700,-0.1,ctx);
+    var tunnel5 = new Tunnel(tunnel_up,tunnel_down,800,-0.1,ctx);
+
+    var ground1 = new Ground(ground,0,-0.3,ctx);
+    var ground2 = new Ground(ground,336,-0.3,ctx);
+    var ground3 = new Ground(ground,336*2,-0.3,ctx);
+    var ground4 = new Ground(ground,336*3,-0.3,ctx);
+
+    var preTime = Date.now();*/
+    //sky1.draw();
+
+
+    /*function run() {
+        var nowTime = Date.now()
+        duration = nowTime - preTime;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+
+        //绘制图片
+        sky1.update(duration);
+        sky1.draw();
+        sky2.update(duration);
+        sky2.draw();
+        sky1.setNum(2);
+        window.requestAnimationFrame(run);
+
+    }*/
+
+
+</script>
+
+</html>

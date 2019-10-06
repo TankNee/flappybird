@@ -5,8 +5,8 @@ var Tunnel = function (upImg,downImg,x,speed,ctx) {
     this.speed = speed;
     this.ctx = ctx;
     this.num = 4;
-    this.y_1 = (Math.random()*200+150);
-    this.y_2 = this.y_1+Math.random()*100+120;
+    this.y_1 = (Math.random()*150+150);
+    this.y_2 = this.y_1+Math.random()*100+150;
     Tunnel.prototype.draw = function () {
         this.ctx.drawImage(this.upImg,this.x,this.y_1-420);
         this.ctx.drawImage(this.downImg,this.x,this.y_2);

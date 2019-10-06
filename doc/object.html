@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <title>Flappy Bird V1.2</title>
@@ -9,133 +9,147 @@
     <script src="./js/Tunnel.js"></script>
     <script src="./js/Bird.js"></script>
     <link rel="stylesheet" href="./css/style.css">
+    <header>Welcome to FlappyBird</header>
 </head>
+
 <body>
     <script>alert("即将开始游戏！")</script>
-    <span>小鸟的速度是</h2><span id="speedDisplay"></span>
-    <br/>
-    <span>您当前的存活时长：</h3><span id="LiveTimeDisplay"></span>
-    <br/>
-    <canvas id = "mycanvas" height="600px" width="800px"></canvas>
+    <div id="display_Module">
+        <span>您当前的存活时长：</h3><span id="LiveTimeDisplay"></span>
+        <br />
+    </div>
+    <div id="game_Module" style="padding: 10px">
+        <canvas id="mycanvas" height="600px" width="800px"></canvas>
+    </div>
+        
 
 </body>
-    <script>
-        var canvas = document.getElementById("mycanvas");
-        var ctx = canvas.getContext("2d");
-        var bg = new Image();
-        bg.src = "./img/bg.jpg";
-        var ground = new Image();
-        ground.src = "./img/ground.jpg";
-        var tunnel_up = new Image();
-        tunnel_up.src = "./img/上管道.jpg";
-        var tunnel_down = new Image();
-        tunnel_down.src = "./img/下管道.jpg";
-        var birds = new Image();
-        birds.src = "./img/三只小鸟.png";
-        //鸟
-        var bird = new Bird(birds,100,300,0.003,0.0006,ctx);
-        //天空背景
-        var background1 = new Background(bg,0,-0.2,ctx);
-        var background2 = new Background(bg,800,-0.2,ctx);
-        //上下管道
-        var tunnel1 = new Tunnel(tunnel_up,tunnel_down,448,-0.1,ctx);
-        var tunnel2 = new Tunnel(tunnel_up,tunnel_down,648,-0.1,ctx);
-        var tunnel3 = new Tunnel(tunnel_up,tunnel_down,848,-0.1,ctx);
-        var tunnel4 = new Tunnel(tunnel_up,tunnel_down,1048,-0.1,ctx);
-        //地面
-        var ground1 = new Ground(ground,0,-0.1,ctx);
-        var ground2 = new Ground(ground,336,-0.1,ctx);
-        var ground3 = new Ground(ground,336*2,-0.1,ctx);
-        var ground4 = new Ground(ground,336*3,-0.1,ctx);
+<script>
+    var canvas = document.getElementById("mycanvas");
+    var ctx = canvas.getContext("2d");
 
-        //游戏参数
-        var gameOver = false;
-        var livetime = 0;
-        var score = 0;
-        preTime = Date.now();
-        //游戏运行函数
-        function run() {
-            nowTime = Date.now();
-            var duration = nowTime - preTime;
-            preTime = nowTime;
-            ctx.clearRect(0,0,canvas.width,canvas.height);
+    //图片加载
+    var bg = new Image();
+    bg.src = "./img/bg.jpg";
+    var ground = new Image();
+    ground.src = "./img/ground.jpg";
+    var tunnel_up = new Image();
+    tunnel_up.src = "./img/上管道.jpg";
+    var tunnel_down = new Image();
+    tunnel_down.src = "./img/下管道.jpg";
+    var birds = new Image();
+    birds.src = "./img/三只小鸟.png";
 
+    //鸟
+    var bird = new Bird(birds, 100, 300, 0.003, 0.0006, ctx);
 
-            //画布元素的更新与绘制
-            background1.update(duration);
-            background1.draw();
-            background2.update(duration);
-            background2.draw();
+    //天空背景
+    var background1 = new Background(bg, 0, -0.2, ctx);
+    var background2 = new Background(bg, 800, -0.2, ctx);
 
+    //上下管道
+    var tunnel1 = new Tunnel(tunnel_up, tunnel_down, 448, -0.1, ctx);
+    var tunnel2 = new Tunnel(tunnel_up, tunnel_down, 648, -0.1, ctx);
+    var tunnel3 = new Tunnel(tunnel_up, tunnel_down, 848, -0.1, ctx);
+    var tunnel4 = new Tunnel(tunnel_up, tunnel_down, 1048, -0.1, ctx);
+    //地面
+    var ground1 = new Ground(ground, 0, -0.1, ctx);
+    var ground2 = new Ground(ground, 336, -0.1, ctx);
+    var ground3 = new Ground(ground, 336 * 2, -0.1, ctx);
+    var ground4 = new Ground(ground, 336 * 3, -0.1, ctx);
 
-            ground1.update(duration);
-            ground1.draw();
-            ground2.update(duration);
-            ground2.draw();
-            ground3.update(duration);
-            ground3.draw();
-            ground4.update(duration);
-            ground4.draw();
+    //游戏参数
+    var gameOver = false;
+    var livetime = 0;
+    var score = 0;
+    preTime = Date.now();
+
+    //游戏运行函数
+    function run() {
+        nowTime = Date.now();
+        var duration = nowTime - preTime;
+        preTime = nowTime;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 
-            tunnel1.update(duration);
-            tunnel1.draw();
-            tunnel2.update(duration);
-            tunnel2.draw();
-            tunnel3.update(duration);
-            tunnel3.draw();
-            tunnel4.update(duration);
-            tunnel4.draw();
-
-            bird.update(duration);
-            document.getElementById("speedDisplay").innerHTML = bird.speed;
-            bird.draw();
+        //画布元素的更新与绘制
+        background1.update(duration);
+        background1.draw();
+        background2.update(duration);
+        background2.draw();
 
 
-            gameOver = gameOver || tunnel1.Collide(bird.x,bird.y);
-            gameOver = gameOver || tunnel2.Collide(bird.x,bird.y);
-            gameOver = gameOver || tunnel3.Collide(bird.x,bird.y);
-            gameOver = gameOver || tunnel4.Collide(bird.x,bird.y);
+        ground1.update(duration);
+        ground1.draw();
+        ground2.update(duration);
+        ground2.draw();
+        ground3.update(duration);
+        ground3.draw();
+        ground4.update(duration);
+        ground4.draw();
 
-            if(bird.y<0 || bird.y > 488-45/4){
-                gameOver = true;
-            }
-            if( ! gameOver){
-                livetime ++;
-                document.getElementById("LiveTimeDisplay").innerHTML = livetime;
-                window.requestAnimationFrame(run);
-            }
+
+        tunnel1.update(duration);
+        tunnel1.draw();
+        tunnel2.update(duration);
+        tunnel2.draw();
+        tunnel3.update(duration);
+        tunnel3.draw();
+        tunnel4.update(duration);
+        tunnel4.draw();
+
+        bird.update(duration);
+        bird.draw();
+
+
+        gameOver = gameOver || tunnel1.Collide(bird.x, bird.y);
+        gameOver = gameOver || tunnel2.Collide(bird.x, bird.y);
+        gameOver = gameOver || tunnel3.Collide(bird.x, bird.y);
+        gameOver = gameOver || tunnel4.Collide(bird.x, bird.y);
+
+        if (bird.y < 0 || bird.y > 488 - 45 / 4) {
+            gameOver = true;
+        }
+        if (!gameOver) {
+            livetime++;
+            document.getElementById("LiveTimeDisplay").innerHTML = livetime;
+            window.requestAnimationFrame(run);
+        }
+
+    }
+    window.requestAnimationFrame(run);
+    canvas.addEventListener("click", function () {
+        bird.speed = -0.3;
+        if (gameOver) {
+            gameOver = false;
+            bird.y = 300;
+            bird.speed = -0.1;
+            tunnel1.x = 448;
+            tunnel2.x = 648;
+            tunnel3.x = 848;
+            tunnel4.x = 1048;
+            livetime = 0;
+            window.requestAnimationFrame(run);
 
         }
-        window.requestAnimationFrame(run);
-        canvas.addEventListener("click",function () {
-                bird.speed = -0.3;
-                if(gameOver){
-                    gameOver = false;
-                    bird.y = 300;
-                    bird.speed = -0.1;
-                    tunnel1.x = 448;
-                    tunnel2.x = 648;
-                    tunnel3.x = 848;
-                    tunnel4.x = 1048;
-                    livetime =0;
-                    window.requestAnimationFrame(run);
+    });
+    canvas.addEventListener("keydown", function () {
+        bird.speed = -0.3;
+        if (gameOver) {
+            gameOver = false;
+            bird.y = 300;
+            bird.speed = -0.1;
+            tunnel1.x = 448;
+            tunnel2.x = 648;
+            tunnel3.x = 848;
+            tunnel4.x = 1048;
+            livetime = 0;
+            window.requestAnimationFrame(run);
+        }
+    });
+</script>
+<footer style="color: gray">
+    <a href="http://tanknee.top" target="_Blank"><span>CopyRight @TankNee</span></a>
+</footer>
 
-                }
-        });
-        canvas.addEventListener("keydown",function(){
-            bird.speed = -0.3;
-                if(gameOver){
-                    gameOver = false;
-                    bird.y = 300;
-                    bird.speed = -0.1;
-                    tunnel1.x = 448;
-                    tunnel2.x = 648;
-                    tunnel3.x = 848;
-                    tunnel4.x = 1048;
-                    livetime = 0;
-                    window.requestAnimationFrame(run);
-                }
-        });
-    </script>
 </html>

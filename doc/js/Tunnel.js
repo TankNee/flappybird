@@ -1,3 +1,5 @@
+document.write("<script language=javascript src='./js/Bird.js'></script>");
+console.log("引入成功");
 var Tunnel = function (upImg,downImg,x,speed,ctx) {
     this.upImg = upImg;
     this.downImg = downImg;

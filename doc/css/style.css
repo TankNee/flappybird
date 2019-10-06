@@ -7,5 +7,27 @@ body{
     background-image: url("http://47.102.45.176:9191/images/2019/10/05/E4C4CFCF-3312-4A51-8FE6-655DA6D43C87.jpg");
     background-repeat: no-repeat;
     background-position: center;
+}
+header{
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 10px;
 
+}
+footer{
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 5px;
+
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+#display_Module{
+    background-color: gray;
+    padding: 5px;
+    color: white;   
 }

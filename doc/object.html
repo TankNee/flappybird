@@ -13,7 +13,9 @@
 </head>
 
 <body>
-    <script>alert("即将开始游戏！")</script>
+    <script>
+        alert("即将开始游戏！")
+    </script>
     <div id="display_Module">
         <span>您当前的存活时长：</h3><span id="LiveTimeDisplay"></span>
         <br />
@@ -21,7 +23,7 @@
     <div id="game_Module" style="padding: 10px">
         <canvas id="mycanvas" height="600px" width="800px"></canvas>
     </div>
-        
+
 
 </body>
 <script>
@@ -118,7 +120,7 @@
 
     }
     window.requestAnimationFrame(run);
-    canvas.addEventListener("click", function () {
+    canvas.addEventListener("click", function() {
         bird.speed = -0.3;
         if (gameOver) {
             gameOver = false;
@@ -133,7 +135,7 @@
 
         }
     });
-    canvas.addEventListener("keydown", function () {
+    canvas.addEventListener("keydown", function() {
         bird.speed = -0.3;
         if (gameOver) {
             gameOver = false;

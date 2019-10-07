@@ -1,33 +1,40 @@
-.myCanvas{
-    position: absolute;
-    left: 200px;
-    top: 0px;
+#game_Module {
+    margin: 0 auto;
+    width: 800px;
 }
-body{
+
+#myCanvas {
+    border: 100px solid black;
+}
+
+body {
     background-image: url("http://47.102.45.176:9191/images/2019/10/05/E4C4CFCF-3312-4A51-8FE6-655DA6D43C87.jpg");
     background-repeat: no-repeat;
     background-position: center;
+    padding: 0px;
 }
-header{
+
+header {
     background-color: black;
     color: white;
     text-align: center;
     padding: 10px;
-
 }
-footer{
+
+footer {
     background-color: black;
     color: white;
     text-align: center;
     padding: 5px;
-
 }
-a{
+
+a {
     text-decoration: none;
     color: white;
 }
-#display_Module{
+
+#display_Module {
     background-color: gray;
     padding: 5px;
-    color: white;   
+    color: white;
 }
